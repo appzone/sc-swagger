@@ -37,7 +37,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  status:
                     type: string
                     example: 'success'
                   data:
@@ -66,7 +66,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  status:
                     type: string
                     example: 'success'
                   data:
@@ -76,7 +76,32 @@ paths:
 
 
   /sc-user/users:
-     post:
+    get:
+      operationId: Get All Users
+      summary: Get All Users
+      description: Get All Users
+      security:
+        - bearerAuth: []
+      tags: 
+        - SC-USER
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: 'success'
+                  data:
+                    type: array
+                    example:
+                      - $ref: '#/components/examples/user/value'
+                      - $ref: '#/components/examples/user/value'
+
+    post:
       operationId: Create User
       summary: Create User
       description: Create User
@@ -98,26 +123,96 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  status:
                     type: string
                     example: 'success'
                   data:
                     type: object
                     example:
                       $ref: '#/components/examples/user/value'
-    # app.post('/sc-user/users', auth, role, users.create);
+  /sc-users/user/{userId}: 
+    delete:
+      operationId: Delete User by User Id
+      summary: Delete User by User Id
+      description: Delete User by User Id
+      parameters: 
+        - $ref: '#/components/parameters/userId'
+      security:
+        - bearerAuth: []      
+      tags: 
+        - SC-User
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Success"
+                  message:
+                    type: string
+                    example: "User deleted successfully!"
 
-    # // Retrieve all users
-    # app.get('/sc-user/users', auth, users.findAll);
-
-    # // Retrieve a single user with UserId
-    # app.get('/sc-user/users/:userId', auth, users.findOne);
-
-    # // Update a user with userid
-    # app.put('/sc-user/users/:userId', auth, role, users.update);
-
-    # // Delete a user with userid
-    # app.delete('/sc-user/users/:userId', auth, role, users.delete);
+    put: 
+      operationId: Update User by User Id
+      summary: Update User by User Id
+      description: Update User by User Id
+      security:
+        - bearerAuth: []
+      requestBody:
+        # required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      tags: 
+        - SC-USER
+      parameters: 
+        - $ref: '#/components/parameters/userId'
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string  
+                    example: 'Success'
+                  data:
+                    type: object
+                    example:
+                      $ref: '#/components/examples/user/value'
+  
+    get:
+      operationId: Get User by User Id
+      summary: Get User by User Id
+      description: Get User by User Id
+      security:
+        - bearerAuth: []      
+      tags: 
+        - SC-USER
+      parameters: 
+        - $ref: '#/components/parameters/userId'
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Success"
+                  data:
+                    type: object
+                    example:
+                      $ref: '#/components/examples/user/value'
 
 components:
   examples:
@@ -143,6 +238,15 @@ components:
             createdAt: "2021-02-12T10:48:16.253Z",
             updatedAt: "2021-02-12T10:48:16.253Z"
         }
+  parameters:
+    userId:
+      name: userId
+      in: path
+      description: User ID
+      required: true
+      schema:
+        type: string
+ 
   schemas:
     User:
       type: object
