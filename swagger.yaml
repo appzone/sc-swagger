@@ -140,7 +140,7 @@ paths:
       security:
         - bearerAuth: []      
       tags: 
-        - SC-User
+        - SC-USER
       responses:
         200:
           description: Ok
