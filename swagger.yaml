@@ -1,0 +1,100 @@
+openapi: 3.0.3
+info:
+  title: SejutaCita API -
+  version: 1.0.0
+
+servers:
+- url: http://167.99.29.250/
+  description: Development
+
+tags:
+- name: SC
+  description: 'SC API'
+
+paths:
+
+### FOR SC-AUTH
+  /sc-auth/login:
+    post:
+      operationId: Login
+      summary: Login
+      description: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      tags: 
+        - SC
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'success'
+                  data:
+                    type: object
+                    example:
+                      $ref: '#/components/examples/login/value'
+  /sc-auth/refresh:
+    post:
+      operationId: Refresh token
+      summary: Refresh token
+      description: Refresh token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            type: object
+            properties:
+              token:
+                type: string
+      tags: 
+        - SC
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'success'
+                  data:
+                    type: object
+                    example:
+                      $ref: '#/components/examples/login/value'
+
+components:
+  examples:
+    login:
+      value: 
+        accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYwMjY1Y2YwNGY4MjNhNDBmNjYyMjQ5NyIsInVzZXJuYW1lIjoiYWFhZGRkIiwicGFzc3dvcmQiOiIkMmEkMDgkWUtnSWxBQ0pyRlNKSHJQSjBmcTUwLlpEYjg4NE9ET2tWZXJHVEQ2S0lCbDMxQXM1a3NiVWUiLCJhZGRyZXNzIjoicXFxcSIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjEtMDItMTJUMTA6NDg6MTYuMjUzWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDItMTJUMTA6NDg6MTYuMjUzWiIsIl9fdiI6MH0sImlhdCI6MTYxMzIxNTU3NCwiZXhwIjoxNjEzMjE2MTc0fQ._pWd9dafWYzt-MNtSK5YCKxtx0zwGrUBivJpLppEa4M"
+        refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYwMjY1Y2YwNGY4MjNhNDBmNjYyMjQ5NyIsInVzZXJuYW1lIjoiYWFhZGRkIiwicGFzc3dvcmQiOiIkMmEkMDgkWUtnSWxBQ0pyRlNKSHJQSjBmcTUwLlpEYjg4NE9ET2tWZXJHVEQ2S0lCbDMxQXM1a3NiVWUiLCJhZGRyZXNzIjoicXFxcSIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjEtMDItMTJUMTA6NDg6MTYuMjUzWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDItMTJUMTA6NDg6MTYuMjUzWiIsIl9fdiI6MH0sImlhdCI6MTYxMzIxNTU3NH0.rxMzz8jjLFwkVqEYiCwJ70gkJMwPruJHfTcAY6OAlbU"
+        user: {
+            _id: "60265cf04f823a40f6622497",
+            username: "aaaddd",
+            password: "asdasd",
+            address: "qqqq",
+            role: "admin",
+            createdAt: "2021-02-12T10:48:16.253Z",
+            updatedAt: "2021-02-12T10:48:16.253Z"
+        }
+  schemas:
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Username
+        password: 
+          type: string
+          description: Password
