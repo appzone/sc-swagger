@@ -37,4 +37,4 @@ Just push to the repo and wait +- 1-2 minutes
 ```
 
 ## Diagram
-[[https://github.com/appzone/sc-swagger/blob/master/diagram.png]]
+![](https://github.com/appzone/sc-swagger/blob/master/diagram.png?raw=true)
