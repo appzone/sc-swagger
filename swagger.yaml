@@ -8,8 +8,10 @@ servers:
   description: Development
 
 tags:
-- name: SC
-  description: 'SC API'
+- name: SC-USER
+  description: 'SC USER API'
+- name: SC-AUTH
+  description: 'SC AUTH API'
 
 paths:
 
@@ -26,7 +28,7 @@ paths:
             schema:
               $ref: '#/components/schemas/Login'
       tags: 
-        - SC
+        - SC-AUTH
       responses:
         200:
           description: Ok
@@ -55,7 +57,7 @@ paths:
               $ref: '#/components/schemas/Refresh'
 
       tags: 
-        - SC
+        - SC-AUTH
       responses:
         200:
           description: Ok
@@ -73,8 +75,61 @@ paths:
                       $ref: '#/components/examples/login/value'
 
 
+  /sc-user/users:
+     post:
+      operationId: Create User
+      summary: Create User
+      description: Create User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      security:
+        - bearerAuth: []
+      tags: 
+        - SC-USER
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'success'
+                  data:
+                    type: object
+                    example:
+                      $ref: '#/components/examples/user/value'
+    # app.post('/sc-user/users', auth, role, users.create);
+
+    # // Retrieve all users
+    # app.get('/sc-user/users', auth, users.findAll);
+
+    # // Retrieve a single user with UserId
+    # app.get('/sc-user/users/:userId', auth, users.findOne);
+
+    # // Update a user with userid
+    # app.put('/sc-user/users/:userId', auth, role, users.update);
+
+    # // Delete a user with userid
+    # app.delete('/sc-user/users/:userId', auth, role, users.delete);
+
 components:
   examples:
+    user:
+      value:
+        _id: "60265cf04f823a40f6622497"
+        username: "aaaddd"
+        password: "asdasd"
+        address: "qqqq"
+        role: "admin"
+        createdAt: "2021-02-12T10:48:16.253Z"
+        updatedAt: "2021-02-12T10:48:16.253Z"      
     login:
       value: 
         accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYwMjY1Y2YwNGY4MjNhNDBmNjYyMjQ5NyIsInVzZXJuYW1lIjoiYWFhZGRkIiwicGFzc3dvcmQiOiIkMmEkMDgkWUtnSWxBQ0pyRlNKSHJQSjBmcTUwLlpEYjg4NE9ET2tWZXJHVEQ2S0lCbDMxQXM1a3NiVWUiLCJhZGRyZXNzIjoicXFxcSIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjEtMDItMTJUMTA6NDg6MTYuMjUzWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDItMTJUMTA6NDg6MTYuMjUzWiIsIl9fdiI6MH0sImlhdCI6MTYxMzIxNTU3NCwiZXhwIjoxNjEzMjE2MTc0fQ._pWd9dafWYzt-MNtSK5YCKxtx0zwGrUBivJpLppEa4M"
@@ -89,6 +144,17 @@ components:
             updatedAt: "2021-02-12T10:48:16.253Z"
         }
   schemas:
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        address:
+          type: string
+        role:
+          type: string
     Refresh:
       type: object
       properties:
