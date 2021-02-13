@@ -169,3 +169,10 @@ components:
         password: 
           type: string
           description: Password
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+ 
