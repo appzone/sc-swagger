@@ -51,10 +51,9 @@ paths:
         required: true
         content:
           application/json:
-            type: object
-            properties:
-              token:
-                type: string
+            schema:
+              $ref: '#/components/schemas/Refresh'
+
       tags: 
         - SC
       responses:
@@ -73,6 +72,7 @@ paths:
                     example:
                       $ref: '#/components/examples/login/value'
 
+
 components:
   examples:
     login:
@@ -89,6 +89,11 @@ components:
             updatedAt: "2021-02-12T10:48:16.253Z"
         }
   schemas:
+    Refresh:
+      type: object
+      properties:
+        token:
+          type: string
     Login:
       type: object
       properties:
