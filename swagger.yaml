@@ -130,7 +130,7 @@ paths:
                     type: object
                     example:
                       $ref: '#/components/examples/user/value'
-  /sc-users/user/{userId}: 
+  /sc-users/users/{userId}: 
     delete:
       operationId: Delete User by User Id
       summary: Delete User by User Id
