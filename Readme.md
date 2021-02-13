@@ -10,6 +10,7 @@ Deployment: Kubernetes managed by Digitalocean
 
 
 
+
 ## Configuration / Setup
 
 
@@ -34,3 +35,6 @@ kubectl --kubeconfig="kubeconfig.yaml" apply -f sc-swagger.yaml
 ```
 Just push to the repo and wait +- 1-2 minutes
 ```
+
+## Diagram
+[[https://github.com/appzone/sc-swagger/blob/master/diagram.png|alt=diagram]]
